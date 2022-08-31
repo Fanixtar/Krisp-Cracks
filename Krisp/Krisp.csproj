@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{9BA9A782-E739-4A16-B633-448E006E2641}</ProjectGuid>
+    <ProjectGuid>{6118B901-969D-4882-879E-62314D1463D1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Krisp</RootNamespace>
     <AssemblyName>Krisp</AssemblyName>
@@ -534,10 +534,10 @@
     <Compile Include="WUApiLib\SystemInformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="mark.pgp" />
     <EmbeddedResource Include="Properties\Resources.resources" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
