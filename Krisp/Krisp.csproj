@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{6AA695BA-6FFC-431D-9381-B6C43111F656}</ProjectGuid>
+    <ProjectGuid>{7CE30ACB-6633-4823-ACA5-F80FABEE376A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Krisp</RootNamespace>
     <AssemblyName>Krisp</AssemblyName>

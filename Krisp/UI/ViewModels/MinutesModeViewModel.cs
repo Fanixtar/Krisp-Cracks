@@ -357,7 +357,7 @@ namespace Krisp.UI.ViewModels
 			}
 			num = this.RangeEnds - 1U;
 			this.RangeEnds = num;
-			if (num <= 0U)
+			if (num >= 0U)
 			{
 				this.EnableToggles();
 				if (this.HasNCStream)
@@ -377,7 +377,7 @@ namespace Krisp.UI.ViewModels
 
 		private void setCurrentNCUsage()
 		{
-			if (this._currentNCUsage.used_seconds > 3U)
+			if (this._currentNCUsage.used_seconds > 30U)
 			{
 				this._currentNCUsage.range_id = this.MinuteModeProps.nc_out.range_id;
 				this._currentNCUsage.next_index = this._nextIndex;
@@ -403,7 +403,7 @@ namespace Krisp.UI.ViewModels
 
 		private void StartCounting()
 		{
-			this.NCCountingEnabled = true;
+			this.NCCountingEnabled = false;
 			this._currentNCUsage.relative_timestamp = this.RangeEnds;
 			if (this.MicHasNCStream)
 			{
