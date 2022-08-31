@@ -1,0 +1,143 @@
+<Page
+	x:Class="Krisp.UI.Views.Pages.KrispAppPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:Controls="clr-namespace:Krisp.UI.Views.Controls" xmlns:Converters="clr-namespace:Krisp.UI.Converters"
+	FontFamily="{StaticResource KrispFont}"
+	Title="KrispAppPage" xmlns:pages="clr-namespace:Krisp.UI.Views.Pages">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<Converters:NullToVisibilityConverter
+				x:Key="NullToVisibilityConverter" />
+			<Converters:AppModeToVisibilityConverter
+				x:Key="AppModeToVisibilityConverter" />
+			<Converters:DaysToGiftMessageConverter
+				x:Key="DaysToGiftMessageConverter" />
+			<Converters:BooleanToVisibilityConverter
+				x:Key="BooleanToVisibilityConverter"
+				TrueValue="Visible"
+				FalseValue="Collapsed" />
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<Grid
+		Height="{Binding ElementName=MainPanel, Path=ActualHeight}">
+		<StackPanel
+			Name="MainPanel"
+			VerticalAlignment="Bottom"
+			Width="309"
+			HorizontalAlignment="Left"
+			Background="#FFF5F4F8">
+			<Controls:HeaderControl
+				DataContext="{Binding HeaderViewModel}" />
+			<Controls:AudioDeviceSelector
+				Margin="0 0 0 10"
+				DataContext="{Binding MicrophoneControllerViewModel}" />
+			<Controls:AudioDeviceSelector
+				Margin="0 0 0 10"
+				DataContext="{Binding SpeakerControllerViewModel}" />
+			<Controls:AppModeControl
+				Margin="0 0 0 10"
+				Visibility="{Binding AppModeViewModel.Mode, Converter={StaticResource AppModeToVisibilityConverter}}" />
+			<Controls:UpdateControl
+				DataContext="{Binding UpdateInfoViewModel}"
+				Visibility="{Binding UpdateInfo, Converter={StaticResource NullToVisibilityConverter}}" />
+		</StackPanel>
+		<ContentControl>
+			<FrameworkElement.Style>
+				<Style
+					TargetType="{x:Type ContentControl}">
+					<Style.Triggers>
+						<DataTrigger
+							Value="True"
+							Binding="{Binding ShowGiftMessage}">
+							<Setter
+								Property="ContentControl.Content">
+								<Setter.Value>
+									<Grid>
+										<Border
+											Background="#F5F4F8"
+											Opacity="0.92"
+											Visibility="Visible" />
+										<StackPanel
+											VerticalAlignment="Center"
+											Margin="0,35,0,0">
+											<Canvas
+												Width="117"
+												Height="96"
+												VerticalAlignment="Top"
+												HorizontalAlignment="Center"
+												Margin="0,0,49,0">
+												<Path
+													Fill="#EED180"
+													Data="M89.995,24.2452 L92.0925,28.4814 C92.3547,29.0028 92.8135,29.3287 93.4034,29.3939 L98.1228,30.0456 C99.5648,30.2411 100.089,32.0008 99.106,32.9784 L95.6976,36.3022 C95.3043,36.6932 95.1076,37.2798 95.1732,37.8012 L95.9597,42.4936 C96.2219,43.9275 94.7144,44.9702 93.469,44.3185 L89.2085,42.1026 C88.6841,41.8419 88.0942,41.8419 87.5698,42.1026 L83.3093,44.3185 C82.0639,44.9702 80.5564,43.9275 80.8186,42.4936 L81.6051,37.8012 C81.6707,37.2146 81.5396,36.6932 81.0807,36.3022 L77.6723,32.9784 C76.6236,32.0008 77.2135,30.2411 78.6555,30.0456 L83.3749,29.3939 C83.9648,29.3287 84.4236,28.9376 84.6858,28.4814 L86.7833,24.2452 C87.5043,22.9417 89.3396,22.9417 89.995,24.2452" />
+												<Path
+													Fill="#EED180"
+													Data="M73.1496,0.652039 L74.6572,3.65 C74.8538,4.04104 75.1815,4.23656 75.5748,4.30173 L78.9177,4.75795 C79.9009,4.88829 80.3597,6.12658 79.5731,6.84349 L77.1479,9.18972 C76.8857,9.45041 76.7546,9.90662 76.8202,10.2977 L77.4101,13.6215 C77.6067,14.5991 76.558,15.3812 75.6404,14.925 L72.6252,13.3608 C72.2975,13.1653 71.8387,13.1653 71.4454,13.3608 L68.4303,14.925 C67.5126,15.3812 66.4639,14.6643 66.6605,13.6215 L67.2504,10.2977 C67.316,9.90662 67.1849,9.51558 66.9227,9.18972 L64.4975,6.84349 C63.7765,6.12658 64.1698,4.88829 65.153,4.75795 L68.4958,4.30173 C68.8891,4.23656 69.2168,3.97587 69.4135,3.65 L70.921,0.652039 C71.3799,-0.195211 72.6908,-0.195211 73.1496,0.652039" />
+												<Path
+													Fill="#F5D8E5"
+													Data="M69.0859,36.9541 L48.7666,61.2637 L48.7666,96.0009 L117,96.0009 L117,36.9541 L69.0859,36.9541"
+													RenderTransformOrigin="0.703,0.474" />
+												<Path
+													Fill="#EED180"
+													Data="M107.299,11.0796 L108.283,13.1 C108.414,13.3607 108.61,13.491 108.872,13.5562 L111.101,13.8821 C111.757,13.9472 112.019,14.7945 111.56,15.2507 L109.921,16.8149 C109.725,17.0104 109.659,17.2711 109.659,17.5318 L110.052,19.7476 C110.183,20.3994 109.462,20.9208 108.872,20.5949 L106.906,19.5521 C106.644,19.4218 106.382,19.4218 106.12,19.5521 L104.153,20.5949 C103.563,20.9208 102.842,20.3994 102.973,19.7476 L103.367,17.5318 C103.432,17.2711 103.301,17.0104 103.104,16.8149 L101.466,15.2507 C101.007,14.7945 101.269,13.9472 101.925,13.8821 L104.153,13.5562 C104.415,13.491 104.678,13.3607 104.743,13.1 L105.726,11.0796 C106.12,10.4279 107.037,10.4279 107.299,11.0796" />
+												<Path
+													Fill="#FF7E61"
+													Data="M77.3448,36.9541 L48.7666,72.2779 L48.7666,94.1761 L95.1078,36.9541 L77.3448,36.9541" />
+												<Path
+													Fill="#FF7E61"
+													Data="M117,43.8623 L74.7227,96.0008 L92.4857,96.0008 L117,65.7605 L117,43.8623" />
+												<Path
+													Fill="#F5D8E5"
+													Data="M65.3498,32.3915 L13.5028,94.3711 C13.0439,94.9577 12.1263,95.0229 11.6019,94.5667 L0.524597,85.3773 C-0.0653189,84.921 -0.130865,84.0086 0.327958,83.4872 L52.175,21.5076 C52.6338,20.921 53.5515,20.8559 54.0759,21.3121 L65.1532,30.5015 C65.7431,30.9577 65.8742,31.805 65.3498,32.3915" />
+												<Path
+													Fill="#FF7E61"
+													Data="M76.6237,27.3736 C77.8907,27.3736 78.9178,26.3524 78.9178,25.0926 C78.9178,23.8328 77.8907,22.8115 76.6237,22.8115 C75.3567,22.8115 74.3296,23.8328 74.3296,25.0926 C74.3296,26.3524 75.3567,27.3736 76.6237,27.3736" />
+												<Path
+													Fill="#FF7E61"
+													Data="M97.3361,7.56017 C98.6031,7.56017 99.6302,6.5389 99.6302,5.27911 C99.6302,4.01931 98.6031,2.99805 97.3361,2.99805 C96.0691,2.99805 95.042,4.01931 95.042,5.27911 C95.042,6.5389 96.0691,7.56017 97.3361,7.56017" />
+												<Path
+													Fill="#FF7E61"
+													Data="M25.4071,51.8689 C27.149,49.7983 26.873,46.7157 24.7906,44.9837 C22.7082,43.2516 19.6079,43.5261 17.866,45.5966 C16.124,47.6672 16.4,50.7498 18.4825,52.4818 C20.5649,54.2139 23.6651,53.9394 25.4071,51.8689" />
+												<Path
+													Fill="#FF7E61"
+													Data="M21.6309,48.7503 L25.1048,32.9784 C25.5636,30.8277 28.1855,29.9152 29.8897,31.349 L37.4275,37.6057 L25.367,51.8786 L21.6309,48.7503" />
+												<Path
+													Fill="#FF7E61"
+													Data="M21.8274,48.4893 L6.81729,54.6807 C4.78535,55.528 4.32653,58.2652 6.03073,59.6339 L13.5685,65.8905 L25.5635,51.6827 L21.8274,48.4893" />
+											</Canvas>
+											<TextBlock
+												FontSize="36"
+												Foreground="#322A42"
+												TextAlignment="Center"
+												Margin="0,14,0,5"
+												Text="{l:Loc YouGotAGift}" />
+											<StackPanel
+												Orientation="Horizontal"
+												HorizontalAlignment="Center"
+												Margin="0,0,0,70">
+												<TextBlock
+													FontSize="14"
+													Foreground="#322A42"
+													TextWrapping="Wrap"
+													Text="{Binding Path=AppModeViewModel.TrialEnds, Converter={StaticResource DaysToGiftMessageConverter}}" />
+												<TextBlock
+													FontSize="14"
+													FontWeight="Bold"
+													Foreground="#322A42"
+													Text="{l:Loc FreePro}" />
+											</StackPanel>
+											<Button
+												Width="185"
+												Height="47"
+												FontSize="14"
+												Style="{StaticResource ButtonStyle}"
+												Content="{l:Loc GetStarted}"
+												Command="{Binding ContinueToFreeProCommand}" />
+										</StackPanel>
+									</Grid>
+								</Setter.Value>
+							</Setter>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</FrameworkElement.Style>
+		</ContentControl>
+	</Grid>
+</Page>

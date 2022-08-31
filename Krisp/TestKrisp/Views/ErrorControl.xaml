@@ -1,0 +1,48 @@
+<UserControl
+	x:Class="Krisp.TestKrisp.Views.ErrorControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI"
+	Background="#FFFFFFFF" xmlns:views="clr-namespace:Krisp.TestKrisp.Views">
+	<StackPanel>
+		<Canvas
+			Width="176"
+			Height="176"
+			Margin="0,30">
+			<Path
+				Fill="#F6D8E5"
+				Opacity="0.23"
+				Data="M0,88 A88,88 0 1 0 176,88A88,88 0 1 0 0,88" />
+			<Path
+				Fill="#F6D8E5"
+				Opacity="0.49"
+				Data="M28,88 A60,60 0 1 0 148,88A60,60 0 1 0 28,88" />
+			<Path
+				Fill="#F96CA9"
+				Data="M88.5,53 C79.3864,53 72.0072,60.9481 72.0072,70.7445 L72.0072,84.7923 C72.0072,94.5887 79.3864,102.537 88.5,102.537 C97.6053,102.537 104.993,94.5976 104.993,84.7923 L104.993,70.7445 C104.993,60.9481 97.6136,53 88.5,53" />
+			<Path
+				Fill="#F96CA9"
+				Data="M74.8942,104.041 C74.1166,103.385 72.9916,103.531 72.3816,104.367 C71.7716,105.204 71.9075,106.414 72.6851,107.071 C76.6022,110.377 81.4414,112.478 86.7104,112.868 L86.7104,119.149 L82.7519,119.149 C81.7635,119.149 80.9623,120.011 80.9623,121.075 C80.9623,122.138 81.7635,123 82.7519,123 L94.1694,123 C95.1577,123 95.959,122.138 95.959,121.075 C95.959,120.011 95.1577,119.149 94.1694,119.149 L90.2896,119.149 L90.2896,112.868 C95.5586,112.478 100.398,110.377 104.315,107.071 C105.093,106.414 105.228,105.204 104.618,104.367 C104.008,103.531 102.883,103.385 102.106,104.041 C98.3593,107.203 93.6347,109.083 88.5,109.083 C83.3653,109.083 78.6407,107.203 74.8942,104.041" />
+		</Canvas>
+		<TextBlock
+			Foreground="#FF2D2D"
+			FontSize="22"
+			TextAlignment="Center"
+			VerticalAlignment="Top"
+			Margin="0,0,0,12"
+			Text="{l:Loc Error}" />
+		<TextBlock
+			Foreground="#737374"
+			FontSize="16"
+			TextAlignment="Center"
+			VerticalAlignment="Top"
+			Margin="0,0,0,10"
+			Text="{l:Loc TestNCErrorMessage}" />
+		<Button
+			Style="{StaticResource ButtonStyle}"
+			FontSize="14"
+			FontWeight="Bold"
+			Width="315"
+			Height="56"
+			Margin="0,110,0,0"
+			Command="{Binding DataContext.TryAgainCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+			Content="{l:Loc TryAgain}" />
+	</StackPanel>
+</UserControl>

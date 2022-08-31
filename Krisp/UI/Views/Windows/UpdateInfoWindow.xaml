@@ -1,0 +1,60 @@
+<Window
+	x:Class="Krisp.UI.Views.Windows.UpdateInfoWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:Controls="clr-namespace:Krisp.UI.Views.Controls"
+	SizeToContent="WidthAndHeight"
+	FontFamily="{StaticResource KrispFont}"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen" xmlns:windows="clr-namespace:Krisp.UI.Views.Windows"
+	Title="{l:Loc UpdateKrisp}">
+	<StackPanel
+		Margin="10"
+		Orientation="Horizontal">
+		<Controls:KrispLogo
+			Height="55"
+			Width="55"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Top" />
+		<StackPanel
+			Margin="10, 0, 0, 0">
+			<TextBlock
+				FontSize="21"
+				FontWeight="Bold"
+				Text="{l:Loc ANewVersionOfKrispIsAvailable}" />
+			<TextBlock
+				Margin="0, 15, 0, 0"
+				FontSize="14"
+				FontWeight="SemiBold"
+				Text="{l:Loc ReleaseNotes}" />
+			<Border
+				BorderBrush="#FFCED6DC"
+				BorderThickness="1"
+				Margin="0,10,0,0">
+				<Grid>
+					<Controls:CircularProgressBar />
+					<WebBrowser
+						Name="wb"
+						Visibility="Hidden"
+						Width="490"
+						Height="240" />
+				</Grid>
+			</Border>
+			<StackPanel
+				Margin="0, 15, 0, 0"
+				Orientation="Horizontal"
+				HorizontalAlignment="Right"
+				Height="37">
+				<Button
+					Name="Cancel"
+					Style="{StaticResource NegativeButtonStyle}"
+					Width="100"
+					Margin="0, 0, 15, 0"
+					IsCancel="True"
+					Content="{l:Loc Cancel}" />
+				<Button
+					Name="Update"
+					Style="{StaticResource ButtonStyle}"
+					Width="100"
+					Content="{l:Loc Update}" />
+			</StackPanel>
+		</StackPanel>
+	</StackPanel>
+</Window>

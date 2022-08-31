@@ -1,0 +1,41 @@
+<Window
+	x:Class="Krisp.TestKrisp.Views.TestKrispWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Local="clr-namespace:Krisp.TestKrisp.Views" xmlns:ViewModels="clr-namespace:Krisp.TestKrisp.ViewModels"
+	Title="Krisp"
+	Height="650"
+	Width="1100"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen"
+	FontFamily="{StaticResource KrispFont}">
+	<StackPanel>
+		<TextBlock
+			FontSize="28"
+			FontWeight="Bold"
+			Margin="0,18,0,0"
+			Foreground="#3B3D50"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Top"
+			Text="{l:Loc TestNC}" />
+		<ContentControl
+			Content="{Binding CurrentDevice}">
+			<FrameworkElement.Resources>
+				<ResourceDictionary>
+					<DataTemplate
+						x:Key="{DataTemplateKey {x:Type ViewModels:RecorderViewModel}}"
+						DataType="{x:Type ViewModels:RecorderViewModel}">
+						<Local:RecorderControl />
+					</DataTemplate>
+					<DataTemplate
+						x:Key="{DataTemplateKey {x:Type ViewModels:PlayerViewModel}}"
+						DataType="{x:Type ViewModels:PlayerViewModel}">
+						<Local:PlayerControl />
+					</DataTemplate>
+					<DataTemplate
+						x:Key="{DataTemplateKey {x:Type ViewModels:ErrorViewModel}}"
+						DataType="{x:Type ViewModels:ErrorViewModel}">
+						<Local:ErrorControl />
+					</DataTemplate>
+				</ResourceDictionary>
+			</FrameworkElement.Resources>
+		</ContentControl>
+	</StackPanel>
+</Window>
