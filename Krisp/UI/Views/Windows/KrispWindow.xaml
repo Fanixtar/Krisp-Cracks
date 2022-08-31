@@ -1,0 +1,170 @@
+<Window
+	x:Class="Krisp.UI.Views.Windows.KrispWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Converters="clr-namespace:Krisp.UI.Converters" xmlns:Pages="clr-namespace:Krisp.UI.Views.Pages" xmlns:Viewmodels="clr-namespace:Krisp.UI.ViewModels"
+	WindowStartupLocation="Manual"
+	Title="Krisp"
+	Width="311"
+	Topmost="True"
+	WindowStyle="None"
+	AllowsTransparency="True"
+	Background="#00FFFFFF"
+	FontFamily="{StaticResource KrispFont}"
+	ResizeMode="NoResize"
+	ShowInTaskbar="False"
+	Height="440"
+	SizeToContent="WidthAndHeight" xmlns:windows="clr-namespace:Krisp.UI.Views.Windows"
+	Content="{Binding CurrentPageViewModel}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<Converters:BooleanToVisibilityConverter
+				x:Key="BooleanToVisibilityConverter"
+				TrueValue="Visible"
+				FalseValue="Collapsed" />
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type Viewmodels:KrispAppPageViewModel}}"
+				DataType="{x:Type Viewmodels:KrispAppPageViewModel}">
+				<Pages:KrispAppPage />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type Viewmodels:SignInPageViewModel}}"
+				DataType="{x:Type Viewmodels:SignInPageViewModel}">
+				<Pages:SignInPage />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type Viewmodels:PostSignInPageViewModel}}"
+				DataType="{x:Type Viewmodels:PostSignInPageViewModel}">
+				<Pages:PostSignInPage />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type Viewmodels:ProgressPageViewModel}}"
+				DataType="{x:Type Viewmodels:ProgressPageViewModel}">
+				<Pages:ProgressPage />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type Viewmodels:GenericPageViewModel}}"
+				DataType="{x:Type Viewmodels:GenericPageViewModel}">
+				<Pages:GenericPage />
+			</DataTemplate>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<Control.Template>
+		<ControlTemplate
+			TargetType="{x:Type Window}">
+			<Border
+				BorderBrush="#83848D"
+				BorderThickness="1">
+				<Grid
+					Background="#FFFFFFFF">
+					<ContentControl
+						Content="{TemplateBinding Content}"
+						ContentTemplate="{TemplateBinding ContentTemplate}"
+						Focusable="False"
+						HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+						VerticalAlignment="{TemplateBinding VerticalAlignment}"
+						ContentStringFormat="{TemplateBinding ContentStringFormat}"
+						HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						Padding="{TemplateBinding Padding}"
+						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<FrameworkElement.Style>
+							<Style
+								TargetType="{x:Type ContentControl}">
+								<Setter
+									Property="ContentControl.Content"
+									Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" />
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}"
+										Value="{x:Null}">
+										<Setter
+											Property="Control.Template">
+											<Setter.Value>
+												<ControlTemplate>
+													<Pages:ProgressPage />
+												</ControlTemplate>
+											</Setter.Value>
+										</Setter>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</FrameworkElement.Style>
+					</ContentControl>
+					<materialDesign:PopupBox
+						IsTabStop="False"
+						PlacementMode="LeftAndAlignTopEdges"
+						HorizontalAlignment="Right"
+						Style="{StaticResource MaterialDesignPopupBox}"
+						VerticalAlignment="Top"
+						Width="24"
+						Height="28"
+						Padding="0"
+						Margin="0,11,8,0">
+						<StackPanel>
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc About}"
+								Command="{Binding AboutCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.About, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc Preferences}"
+								Command="{Binding PreferencesCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.Preferences, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc CheckForUpdate}"
+								Command="{Binding UpdateWindowCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.CheckForUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Rectangle
+								Height="0.5"
+								Fill="#FF929292" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc ReportAProblem}"
+								Command="{Binding ReportBugCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.ReportBug, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc ContactSupport}"
+								Command="{Binding ContactSupportCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.ContactSupport, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc SetupKrisp}"
+								Command="{Binding SetupKrispCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.SetupKrisp, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Rectangle
+								Height="0.5"
+								Fill="#FF929292" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc SignOut}"
+								Command="{Binding SignOutCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.SignOut, Converter={StaticResource BooleanToVisibilityConverter}}" />
+							<Button
+								Height="30"
+								FontSize="12"
+								VerticalContentAlignment="Center"
+								Content="{l:Loc Quit}"
+								Command="{Binding QuitCommand}"
+								Visibility="{Binding CurrentPageViewModel.MenuItemsVisibility.Quit, Converter={StaticResource BooleanToVisibilityConverter}}" />
+						</StackPanel>
+					</materialDesign:PopupBox>
+				</Grid>
+			</Border>
+		</ControlTemplate>
+	</Control.Template>
+</Window>

@@ -1,0 +1,176 @@
+<UserControl
+	x:Class="Krisp.UI.Views.Controls.AppModeControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:ViewModels="clr-namespace:Krisp.UI.ViewModels" xmlns:Converters="clr-namespace:Krisp.UI.Converters"
+	FontFamily="{StaticResource KrispFont}"
+	Width="286"
+	Height="50" xmlns:controls="clr-namespace:Krisp.UI.Views.Controls"
+	Content="{Binding AppModeViewModel}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<Converters:AvailableSecondsToLongStringConverter
+				x:Key="AvailableSecondsToLongStringConverter" />
+			<Converters:RangeEndDateConverter
+				x:Key="RangeEndDateConverter" />
+			<Converters:TrialExpireDateConverter
+				x:Key="TrialExpireDateConverter" />
+			<Converters:AvailableSecondsToShortStringConverter
+				x:Key="AvailableSecondsToShortStringConverter" />
+			<Converters:ValueToPointConverter
+				x:Key="ValueToPointConverter"
+				Radius="11" />
+			<Converters:ValueToIsLargeConverter
+				x:Key="isLargeConverter" />
+			<Converters:PercentageToColorConverter
+				x:Key="PercentageToColorConverter" />
+			<Converters:WeeklyMinutesToTextConverter
+				x:Key="WeeklyMinutesToTextConverter" />
+			<Converters:MinutePropsToVisibilityConverter
+				x:Key="MinutePropsToVisibilityConverter" />
+			<Converters:YouHaveMinutesVisibilityConverter
+				x:Key="YouHaveMinutesVisibilityConverter" />
+			<Converters:YouHaveMinutesConverter
+				x:Key="YouHaveMinutesConverter" />
+			<Converters:NoMinutesLeftVisibilityConverter
+				x:Key="NoMinutesLeftVisibilityConverter" />
+			<Converters:SecondsToWidthConverter
+				x:Key="SecondsToWidthConverter" />
+			<Converters:MintoMinsConverter
+				x:Key="MintoMinsConverter" />
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type ViewModels:MinutesModeViewModel}}"
+				DataType="{x:Type ViewModels:MinutesModeViewModel}">
+				<Border
+					Background="#DDDFEA"
+					CornerRadius="3">
+					<Grid
+						Margin="5,3">
+						<StackPanel
+							VerticalAlignment="Top">
+							<StackPanel
+								Orientation="Horizontal">
+								<UIElement.Visibility>
+									<MultiBinding
+										Converter="{StaticResource MinutePropsToVisibilityConverter}">
+										<Binding
+											Path="NCEnds" />
+										<Binding
+											Path="MinuteModeProps.nc_out.template.balance" />
+										<Binding
+											Path="NCCountingEnabled" />
+									</MultiBinding>
+								</UIElement.Visibility>
+								<TextBlock
+									FontWeight="Bold"
+									VerticalAlignment="Center">
+									<FrameworkElement.Style>
+										<Style
+											TargetType="{x:Type TextBlock}">
+											<Setter
+												Property="TextBlock.Text"
+												Value="{Binding NCEnds, Converter={StaticResource AvailableSecondsToShortStringConverter}}" />
+											<Setter
+												Property="TextBlock.Foreground"
+												Value="#322A42" />
+											<Style.Triggers>
+												<DataTrigger
+													Value="True"
+													Binding="{Binding NCCountingEnabled}">
+													<Setter
+														Property="TextBlock.Text"
+														Value="{Binding NCEnds, Converter={StaticResource AvailableSecondsToLongStringConverter}}" />
+													<Setter
+														Property="FrameworkElement.Width"
+														Value="{Binding NCEnds, Converter={StaticResource SecondsToWidthConverter}}" />
+													<Setter
+														Property="TextBlock.Foreground"
+														Value="#FF7E61" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</FrameworkElement.Style>
+								</TextBlock>
+								<TextBlock
+									VerticalAlignment="Center"
+									FontWeight="Bold"
+									Margin="2,0,0,0"
+									Text="{Binding NCEnds, Converter={StaticResource MintoMinsConverter}}" />
+							</StackPanel>
+							<TextBlock
+								FontWeight="Bold"
+								Text="{Binding MinuteModeProps.nc_out.template.balance, Converter={StaticResource YouHaveMinutesConverter}}">
+								<UIElement.Visibility>
+									<MultiBinding
+										Converter="{StaticResource YouHaveMinutesVisibilityConverter}">
+										<Binding
+											Path="NCEnds" />
+										<Binding
+											Path="MinuteModeProps.nc_out.template.balance" />
+										<Binding
+											Path="NCCountingEnabled" />
+									</MultiBinding>
+								</UIElement.Visibility>
+							</TextBlock>
+							<TextBlock
+								FontWeight="Bold"
+								Text="{l:Loc NoMinutesLeftThisWeek}"
+								Visibility="{Binding NCEnds, Converter={StaticResource NoMinutesLeftVisibilityConverter}}" />
+						</StackPanel>
+						<StackPanel
+							VerticalAlignment="Bottom">
+							<TextBlock
+								FontSize="10"
+								VerticalAlignment="Center"
+								Text="{Binding MinuteModeProps.nc_out.template.balance, Converter={StaticResource WeeklyMinutesToTextConverter}}" />
+							<TextBlock
+								FontSize="10"
+								VerticalAlignment="Center"
+								Text="{Binding RangeEnds, Converter={StaticResource RangeEndDateConverter}}" />
+						</StackPanel>
+						<Button
+							Width="85"
+							Height="30"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Right"
+							FontSize="10"
+							Style="{StaticResource ButtonStyle}"
+							Content="{l:Loc UpgradeButton}"
+							Command="{Binding DataContext.OpenPricePlanCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+					</Grid>
+				</Border>
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type ViewModels:TrialModeViewModel}}"
+				DataType="{x:Type ViewModels:TrialModeViewModel}">
+				<Border
+					Background="#DDDFEA"
+					CornerRadius="3">
+					<Grid
+						Margin="5,3">
+						<WrapPanel
+							Orientation="Horizontal"
+							MaxWidth="190"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Left">
+							<TextBlock
+								FontSize="12"
+								Text="{l:Loc ExpiresOn}" />
+							<TextBlock
+								FontSize="12"
+								FontWeight="Bold"
+								HorizontalAlignment="Left"
+								Text="{Binding TrialEnds, Converter={StaticResource TrialExpireDateConverter}}" />
+						</WrapPanel>
+						<Button
+							Width="85"
+							Height="30"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Right"
+							FontSize="10"
+							Style="{StaticResource ButtonStyle}"
+							Content="{l:Loc UpgradeButton}"
+							Command="{Binding DataContext.OpenPricePlanCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+					</Grid>
+				</Border>
+			</DataTemplate>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+</UserControl>

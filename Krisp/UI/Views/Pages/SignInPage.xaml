@@ -1,0 +1,46 @@
+<Page
+	x:Class="Krisp.UI.Views.Pages.SignInPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:Krisp.UI.Views.Controls" xmlns:l="clr-namespace:Krisp.UI" xmlns:s="clr-namespace:System;assembly=mscorlib"
+	Title="SignInPage"
+	FontFamily="{StaticResource KrispFont}" xmlns:pages="clr-namespace:Krisp.UI.Views.Pages">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<s:Boolean
+				x:Key="True">True</s:Boolean>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<StackPanel
+		Width="309"
+		Height="355"
+		Background="#FFFFFFFF">
+		<Controls:KrispBrand
+			Margin="0,100,0,0"
+			Width="109"
+			Height="51" />
+		<TextBlock
+			HorizontalAlignment="Center"
+			FontSize="14"
+			Width="160"
+			TextWrapping="Wrap"
+			TextAlignment="Center"
+			Margin="0,15,0,0"
+			VerticalAlignment="Top"
+			Text="{l:Loc MuteBackgroundNoiseInYourCalls}" />
+		<Button
+			Width="225"
+			Height="37"
+			VerticalAlignment="Top"
+			Margin="0,34,0,0"
+			Style="{StaticResource ButtonStyle}"
+			Content="{l:Loc SignIn}"
+			Command="{Binding SignInCommand}" />
+		<Button
+			Width="225"
+			Height="37"
+			VerticalAlignment="Top"
+			Margin="0,10,0,0"
+			CommandParameter="{StaticResource True}"
+			Style="{StaticResource NegativeButtonStyle}"
+			Content="{l:Loc TestNC}"
+			Command="{Binding DataContext.TestNoiseCancellationCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+	</StackPanel>
+</Page>

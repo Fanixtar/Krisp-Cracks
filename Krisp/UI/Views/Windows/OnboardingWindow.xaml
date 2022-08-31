@@ -1,0 +1,28 @@
+<Window
+	x:Class="Krisp.UI.Views.Windows.OnboardingWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:Views="clr-namespace:Krisp.UI.Views.Controls" xmlns:ViewModels="clr-namespace:Krisp.UI.ViewModels"
+	FontFamily="{StaticResource KrispFont}"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen"
+	SizeToContent="WidthAndHeight" xmlns:windows="clr-namespace:Krisp.UI.Views.Windows"
+	Title="{l:Loc SetupKrisp}"
+	Content="{Binding CurrentView}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type ViewModels:OnboardingAppSelectionViewModel}}"
+				DataType="{x:Type ViewModels:OnboardingAppSelectionViewModel}">
+				<Views:OnboardingAppSelectionView />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type ViewModels:OnboardingSetupViewModel}}"
+				DataType="{x:Type ViewModels:OnboardingSetupViewModel}">
+				<Views:OnboardingSetupView />
+			</DataTemplate>
+			<DataTemplate
+				x:Key="{DataTemplateKey {x:Type ViewModels:OnboardingFinishViewModel}}"
+				DataType="{x:Type ViewModels:OnboardingFinishViewModel}">
+				<Views:OnboardingFinishView />
+			</DataTemplate>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+</Window>

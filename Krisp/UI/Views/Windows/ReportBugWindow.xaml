@@ -1,0 +1,142 @@
+<Window
+	x:Class="Krisp.UI.Views.Windows.ReportBugWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:l="clr-namespace:Krisp.UI" xmlns:local="clr-namespace:Krisp.UI.Views.Windows" xmlns:Converters="clr-namespace:Krisp.UI.Converters"
+	FontFamily="{StaticResource KrispFont}"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen"
+	SizeToContent="WidthAndHeight"
+	Title="{l:Loc ReportAProblem}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<local:ArrayToVisibility
+				x:Key="ArrayToVisibility" />
+			<Converters:TextToEnabledConverter
+				x:Key="TextToEnabledConverter" />
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<StackPanel
+		Width="397"
+		Margin="25"
+		Orientation="Vertical"
+		FocusManager.FocusedElement="{Binding ElementName=Description}">
+		<TextBlock
+			FontWeight="Bold"
+			FontSize="14"
+			Text="{l:Loc TellUsAboutTheIssue}" />
+		<TextBlock
+			FontSize="10">
+			<Hyperlink
+				Click="Hyperlink_Click">
+				<FrameworkContentElement.Style>
+					<Style
+						TargetType="{x:Type Hyperlink}">
+						<Style.Triggers>
+							<Trigger
+								Property="ContentElement.IsMouseOver"
+								Value="True">
+								<Setter
+									Property="TextElement.Foreground"
+									Value="#ACB6FF" />
+							</Trigger>
+						</Style.Triggers>
+						<Setter
+							Property="TextElement.Foreground"
+							Value="#6371DE" />
+						<Setter
+							Property="Inline.TextDecorations"
+							Value="None" />
+					</Style>
+				</FrameworkContentElement.Style>
+				<Run
+					Text="{l:Loc OrSendReportManually}" />
+			</Hyperlink>
+		</TextBlock>
+		<TextBlock
+			Margin="0,10,0,0"
+			FontSize="10"
+			Text="{l:Loc Description}" />
+		<TextBox
+			Name="Description"
+			Margin="0,5,0,0"
+			Height="120"
+			MaxLength="500"
+			AcceptsReturn="True"
+			VerticalScrollBarVisibility="Auto"
+			TextWrapping="Wrap"
+			Padding="10"
+			TabIndex="2"
+			Text="{Binding Description}">
+			<FrameworkElement.Style>
+				<Style xmlns:sys="clr-namespace:System;assembly=mscorlib"
+					TargetType="{x:Type TextBox}">
+					<Style.Resources>
+						<ResourceDictionary>
+							<VisualBrush
+								x:Key="CueBannerBrush"
+								AlignmentX="Left"
+								AlignmentY="Top"
+								Stretch="None">
+								<VisualBrush.Visual>
+									<Grid
+										Background="#00FFFFFF">
+										<TextBlock
+											Foreground="#B6B6B7"
+											Margin="12,10,0,0"
+											Text="{l:Loc DescribeTheProblem}" />
+									</Grid>
+								</VisualBrush.Visual>
+							</VisualBrush>
+						</ResourceDictionary>
+					</Style.Resources>
+					<Style.Triggers>
+						<Trigger
+							Property="TextBox.Text"
+							Value="{x:Static sys:String.Empty}">
+							<Setter
+								Property="Control.Background"
+								Value="{StaticResource CueBannerBrush}" />
+						</Trigger>
+						<Trigger
+							Property="TextBox.Text"
+							Value="{x:Null}">
+							<Setter
+								Property="Control.Background"
+								Value="{StaticResource CueBannerBrush}" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</FrameworkElement.Style>
+		</TextBox>
+		<CheckBox
+			Style="{StaticResource KrispCheckBox}"
+			Margin="0 15 0 0"
+			IsChecked="{Binding IncludeRecordings}"
+			Content="{l:Loc IncludeSapmle}"
+			Visibility="{Binding AdditionalFiles, Converter={StaticResource ArrayToVisibility}}" />
+		<CheckBox
+			Style="{StaticResource KrispCheckBox}"
+			Margin="0 15 0 0"
+			IsChecked="{Binding IncludeSysInfo}"
+			Content="{l:Loc IncludeSysInfo}" />
+		<StackPanel
+			Orientation="Horizontal"
+			HorizontalAlignment="Right"
+			Margin="0,15,0,0"
+			Height="37">
+			<Button
+				Name="Cancel"
+				Width="150"
+				TabIndex="5"
+				Margin="0, 0, 15, 0"
+				Style="{StaticResource NegativeButtonStyle}"
+				Content="{l:Loc Cancel}" />
+			<Button
+				Name="Report"
+				Width="150"
+				TabIndex="4"
+				Style="{StaticResource ButtonStyle}"
+				Content="{l:Loc Send}"
+				IsEnabled="{Binding ElementName=Description, Path=Text, Converter={StaticResource TextToEnabledConverter}}"
+				Command="{Binding SendReportCommand}" />
+		</StackPanel>
+	</StackPanel>
+</Window>
