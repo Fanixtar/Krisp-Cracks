@@ -1,9 +1,0 @@
-<Page
-	x:Class="Krisp.UI.Views.Pages.ProgressPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:Krisp.UI.Views.Controls"
-	Title="ProgressPage"
-	Template="{StaticResource PageTemplateWithKrispLogo}"
-	FontFamily="{StaticResource KrispFont}" xmlns:pages="clr-namespace:Krisp.UI.Views.Pages">
-	<Grid>
-		<Controls:CircularProgressBar />
-	</Grid>
-</Page>
